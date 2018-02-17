@@ -1,4 +1,4 @@
-# -react-js
+NOTES
 
 Here we use LET INSTEAD OF VAR AND CONST for constant variables which cannot be reassigned,
 try online compiler <http//jsbin.com>
