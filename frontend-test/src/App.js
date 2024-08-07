@@ -1,13 +1,15 @@
 import './App.css';
 import React, {useState, useEffect} from "react";
+import axios from "axios"
 
 
 function App() {
 
 const [data, setData] = useState([])
+const [bikeData, setBikeData] = useState([])
 
 useEffect(()=>{
-  const fetchData = async () => {
+  const fetchDataflood = async () => {
     try{
       const response = await fetch('https://environment.data.gov.uk/flood-monitoring/data/readings/')
       if (!response.ok){
@@ -21,15 +23,29 @@ useEffect(()=>{
       console.error('Error fetching data:', error)
     }
   };
-  fetchData();
 
+  const fetchDatabikenyc = async () => {
+    try {
+      const response = await axios.get('https://gbfs.citibikenyc.com/gbfs/gbfs.json');
+      setBikeData(response.data)
+      console.log('Fetched tasks:', response.data);
+      
+    }
+  catch(error){
+    console.error("Error fetching", error)
+  }
+  console.log("The bikedata ---- ",bikeData)
+  }
+
+  fetchDataflood();
+  fetchDatabikenyc();
 }, []);
 
 
 
   return (
     <div className="App">
-      {data.length > 0 ? (
+      {/* {data.length > 0 ? (
         <ul>
           {data.map((item, index) => (
             <li key={index}>
@@ -41,7 +57,25 @@ useEffect(()=>{
         </ul>
       ) : (
         <p>Loading data...</p>
-      )}
+      )} */}
+
+
+      {bikeData.data ? (
+        <ul>
+          {Object.keys(bikeData.data).map((key, index) => (
+            <li key={index}>
+              <h3>{key}</h3>
+              <p><strong> url : </strong> {JSON.stringify(bikeData.data[key])}</p>
+
+            </li>
+          ))}
+        </ul>
+
+      ):(
+        <p>Loading...</p>
+      )
+
+      }
      
     </div>
   );
