@@ -12,10 +12,10 @@ To implement a user authentication system with user registration, login, and log
 ### Problem: Build a weather dashboard that fetches and displays weather information based on user input.
 Skills Tested: API consumption (e.g., OpenWeatherMap), data visualization, frontend frameworks, state management.
 
-OpenWeatherMap API in frontend and Django in backend
+OpenWeatherMap API for frontend using react and Django in the backend
 
 
-NOTES: 
+## NOTES: 
 
 React and Javascript
 
